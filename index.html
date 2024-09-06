@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totally Safe Button</title>
+    <script src="./server.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ff5e57;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        button {
+            justify-content: center;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #ff5e57;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #ff4343;
+        }
+
+        button:active {
+            transform: scale(0.9);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+       
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Hey there, brave soul!</h1>
+        <p>Whatever you do, do NOT press the button below... unless you're feeling *adventurous*!</p>
+        <button id="shutdownBtn">DO NOT PRESS!</button>
+    </div>
+
+    <script>
+        document.getElementById('shutdownBtn').addEventListener('click', () => {
+            if (confirm("Are you sure? This button does *mysterious* things...")) {
+                fetch('/shutdown', { method: 'POST' })
+                    .then(response => response.text())
+                    .then(data => alert("Oops! Too late... " + data))
+                    .catch(error => console.error('The button has spoken: ', error));
+            } else {
+                alert("Wise choice! The button awaits your next visit...");
+            }
+        });
+    </script>
+
+    <div class="footer">
+        <p>© 2024 The Mystery Button Corp.</p>
+    </div>
+</body>
+</html>
